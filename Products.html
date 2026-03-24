@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<title>ASG</title>
+<style>
+
+body {
+  margin: 0;
+  font-family: 'regular', sans-serif;
+  direction: ltr;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'medium', sans-serif;
+}
+
+/* الهيدر */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  color: #1e3a8a; /* أزرق */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+/* الشمال */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu-icon {
+  font-size: 26px;
+  cursor: pointer;
+  color: #1e3a8a;
+}
+
+/* القائمة */
+.dropdown {
+  position: absolute;
+  top: 70px;
+  left: 20px;
+  background: white;
+  padding: 15px;
+  display: none;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.dropdown a {
+  color: #1e3a8a;
+  text-decoration: none;
+  padding: 8px 0;
+}
+
+.dropdown a:hover {
+  color: #60a5fa;
+}
+
+/* النص */
+.center {
+  display: flex;
+  gap: 30px;
+}
+
+.center a {
+  color: #1e3a8a;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.center a:hover {
+  color: #60a5fa;
+}
+
+/* اللوجو */
+.right img {
+  height: 40px;
+  background: hsl(0, 0%, 4%);
+}
+
+  header .logo img {
+            height: 50px;
+            margin-right: 60px; /* مسافة بين اللوجو والقائمة */
+        }
+/* اللغة */
+.lang {
+  position: relative;
+  cursor: pointer;
+  color: #1e3a8a;
+}
+
+/* قائمة اللغة */
+.lang-menu {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  display: none;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.lang-menu a {
+  display: block;
+  color: #1e3a8a;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.lang-menu a:hover {
+  color: #60a5fa;
+}
+
+/* تظهر */
+.lang:hover .lang-menu {
+  display: block;
+}
+.header-box {
+  background-color: oklab(87.69500000000001% -0.01493 -0.05776); /* بيبي بلو */
+  padding: 50px 40px;
+  border-radius: 15px;
+
+  text-align: left; /* يخلي النص شمال */
+}
+/* H4 */
+.header-box h4 {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 10px;
+}
+/* H1 */
+.header-box h1 {
+  font-size: 36px;
+  color: #2563eb; /* أزرق */
+  font-weight: bold;
+}
+
+
+.footer {
+  background-color: hwb(214 3% 47% / 0.982); /* أزرق فاتح */
+  padding: 40px 20px;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* اللوجو */
+.footer-logo img {
+  width: 120px;
+}
+
+/* المنتصف - اللينكات */
+.footer-links {
+  display: flex;
+  gap: 40px; /* المسافة بين العمودين */
+  flex: 1;
+  justify-content: center;
+}
+
+.footer-links-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  color: hsl(250, 94%, 48%);
+}
+
+/* اليمين - Address & Email */
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: right;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.contact-item .icon {
+  font-size: 20px;
+  margin-top: 3px;
+}
+
+.contact-item h4 {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  margin-bottom: 3px;
+  font-size: 16px;
+}
+
+.contact-item p {
+  font-weight: 400;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Responsive للموبايل */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-links-column {
+    margin-bottom: 15px;
+  }
+
+  .footer-contact {
+    text-align: left;
+  }
+}
+
+
+
+.careers-section {
+  background: linear-gradient(135deg, hsl(224, 74%, 41%), hwb(221 34% 0%)); /* أزرق */
+  padding: 100px 20px;
+  text-align: center;
+  color: white;
+}
+
+/* السكشن كله شمال */
+.careers-section {
+  text-align: left;
+}
+
+/* Home / Careers */
+.breadcrumb {
+  font-size: 16px;
+  margin-bottom: 15px;
+  opacity: 0.8;
+}
+
+/* العنوان */
+.careers-section h1 {
+  font-size: 42px;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+
+/* الصورة */
+.image-box img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+
+  border-radius: 200px / 100px;
+}
+
+
+.services-section {
+  padding: 80px 10%;
+  text-align: center;
+}
+
+/* العنوان */
+.services-section .header h1 {
+  font-size: 40px;
+  color: #003366;
+}
+
+.services-section .header p {
+  color: #555;
+  margin-bottom: 50px;
+}
+
+/* الكروت */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 مربعات في الصف */
+  gap: 25px;
+}
+/* الكارت */
+.card {
+  border: 2px solid #003366;
+  padding: 20px;
+  border-radius: 12px;
+  transition: 0.3s;
+  background: #fff;
+}
+
+/* صورة */
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* hover */
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+}
+
+/* الزرار */
+.card button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #003366;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* الفورم */
+.form-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.form-box {
+  background: #fff;
+  width: 350px;
+  margin: 100px auto;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.form-box input,
+.form-box textarea {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.form-box button {
+  background: #003366;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  width: 100%;
+}
+
+/* زرار القفل */
+.close {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+}
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+</style>
+</head>
+<body>
+<!-- HEADER -->
+<header class="navbar">
+
+  <!-- الشمال -->
+  <div class="left">
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <div class="dropdown" id="menu">
+      <a href="index.html">Home</a>
+      <a href="adout.html">About us</a>
+      <a href="Products.html">Products</a>
+      <a href="industries.html">Industries</a>
+      <a href="Project.html">Projects</a>
+      <a href="quality.html">Quality</a>
+    </div>
+
+    <!-- اللغة -->
+    <div class="lang">
+      🌐
+      <div class="lang-menu">
+        <a href="Products1.html">Arabic</a>
+        <a href="Products.html">English</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- النص في النص -->
+  <div class="center">
+    <a href="caseers.html">Careers</a>
+    <a href="Contactus.html">Contact us</a>
+    <a href="faq.html">FAQ</a>
+  </div>
+
+  <!-- اليمين -->
+    <div class="container">
+            <!-- اللوجو ناحية اليسار -->
+            <div class="logo">
+                <img src="logo.png" alt="شعار الموقع">
+            </div>
+
+</header>
+
+<section class="careers-section">
+  <div class="content">
+    
+    <p class="breadcrumb">Home /Products</p>
+    
+    <h1>What we offer ?</h1>
+    
+    <div class="image-box">
+      <img src="hero10.webp" alt="Team">
+    </div>
+
+  </div>
+</section>
+
+<section class="services-section">
+
+  <!-- العنوان -->
+  <div class="header">
+    <h1>Featured Products</h1>
+    <p>Specializes in manufacturing all central air conditioning equipment, including sheet metal, grilles, and cable trays.</p>
+  </div>
+
+  <!-- الكروت -->
+  <div class="cards">
+
+    <!-- كرري الكارت ده 15 مرة -->
+    <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.46 PM.jpeg" alt="">
+      <h3>Rectangular Ducts</h3>
+      <p>At ASG for Engineering Industries</P>
+        <P>,our Rectangular Ducts are expertly</P>
+        <P> engineered to provide superior air</P>
+         <P> distribution in a wide variety</P> 
+       <P> of HVAC systems. </P>
+       
+      <button onclick="openForm()">Contact</button>
+    </div>
+     
+      <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM.jpeg" alt="">
+      <h3>Duct Fittings</h3>
+      <p>Comprehensive range of high-quality</P>
+       <P> duct fittings including elbows, tees,</P>
+       <P> transitions, and reducers, engineered</P>
+       <P>for optimal airflow and minimal energy loss.</p>
+        <BR>
+      <button onclick="openForm()">Contact</button>
+    </div>
+     
+      <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (2).jpeg" alt="">
+      <h3>Fire Rated Mild Steel Ducts</h3>
+      <p>ASG for Engineering Industries</P>
+     <P>  specializes in the manufacture of </P>
+      <P> Fire Rated Mild Steel Ducts, designed</P>
+       <P> to meet the most stringent fire safety standards.</p>
+        <Br>
+      <button onclick="openForm()">Contact</button>
+    </div>
+     
+          <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (1).jpeg" alt="">
+      <h3>Duct Support and Hangers</h3>
+      <p>At ASG for Engineering Industries, </P>
+        <P>we offer robust Duct Support and Hangers </P> 
+       <P>designed to securely suspend and support </P>
+        <P>both round and rectangular ducts in HVAC systems.</p>
+        <Br>
+      <button onclick="openForm()">Contact</button>
+    </div>
+
+          <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (3).jpeg" alt="">
+      <h3>Volume Control Dampers</h3>
+      <p>Zamzam for Engineering Industries offers</P>
+    <P> precision-engineered Volume Control Dampers</P>
+     <P> designed to regulate and balance airflow in</P>
+      <P> HVAC systems. Made from high-quality galvanized </P>
+      <button onclick="openForm()">Contact</button>
+    </div>
+
+          <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (11).jpeg" alt="">
+      <h3>Pressure Relief Dampers</h3>
+      <p>ASGfor Engineering Industries specializes </P>
+       <P> in manufacturing high-quality Pressure Relief </P>
+       <P> Dampers designed to protect HVAC systems from</P>
+        <P> overpressure conditions. </P>
+        <Br>
+      <button onclick="openForm()">Contact</button>
+    </div>
+
+      <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (10).jpeg" alt="">
+      <h3>Low Leakage Dampers</h3>
+      <p>ASG for Engineering Industries </P>
+        <P>manufactures high-performance Low </P> 
+       <P>Leakage Dampers designed to minimize airflow </P> 
+       <P>leakage and improve the efficiency of HVAC systems.</P>  
+      <P> Constructed from high-quality materials</P> 
+       <P> such as galvanized or stainless steel</P>
+      <button onclick="openForm()">Contact</button>
+    </div>
+
+     <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (9).jpeg" alt="">
+      <h3>Non-Return Dampers</h3>
+      <p>ASG for Engineering Industries manufactures </P>
+      <P>  high-quality Non-Return Dampers, designed to </P> 
+      <P> prevent the reverse flow of air in HVAC systems,</P>
+        <P> ensuring that airflow is maintained in the correct direction.</P>
+        <Br><BR><BR>
+      <button onclick="openForm()">Contact</button>
+    </div>
+
+      <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (8).jpeg" alt="">
+      <h3>Splitter Dampers</h3>
+      <p>ASG for Engineering Industries offers expertly</P> 
+      <P>  engineered Splitter Dampers designed to split and </P>
+       <P> control airflow in HVAC systems. These dampers are</P> 
+       <P> typically used in ductwork to divide airflow between</P>  
+      <P> multiple branches or sections </P>
+      <BR>
+      <button onclick="openForm()">Contact</button>
+    </div>
+
+
+        <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (7).jpeg" alt="">
+      <h3>Curtain Blade Fire Damper</h3>
+      <p>ASG for Engineering Industries manufactures</p>
+        <p> high-performance Curtain Blade Fire Dampers,</p> 
+        <p> designed to provide critical fire safety in </p>
+         <p> HVAC systems. These dampers are equipped with</p>  
+         <p>a curtain blade mechanism that automatically </p>
+      <button onclick="openForm()">Contact</button>
+    </div>
+
+        <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (6).jpeg" alt="">
+      <h3>Motorized Fire Damper</h3>
+      <p>ASG for Engineering Industries offers high-quality</p>
+       <p>  Motorized Fire Dampers, designed to provide enhanced</p>
+       <p>   fire safety and automatic smoke and fire containment </p>
+        <p>  in HVAC systems. Equipped with a motorized actuator, </p>
+         <br><br><br>
+     
+      <button onclick="openForm()">Contact</button>
+    </div>
+
+        <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (5).jpeg" alt="">
+      <h3>Smoke Damper</h3>
+      <p>ASGfor Engineering Industries manufactures </p>
+       <p> high-performance Smoke Dampers, designed to </p>
+       <p> control and restrict the movement of smoke</p>  
+       <p>in HVAC systems during a fire or smoke event</p>
+       <p> . These dampers are engineered to close </p>
+        
+      <button onclick="openForm()">Contact</button>
+    </div>
+     
+        <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (4).jpeg" alt="">
+      <h3>VAV Bypass</h3>
+      <p>ASG for Engineering Industries manufactures </p> 
+      <p> high-performance VAV (Variable Air Volume) Bypass</p> 
+       <p> Dampers, designed to maintain optimal airflow and</p>
+         <p> system pressure in HVAC applications with VAV systems </p>
+        
+      <button onclick="openForm()">Contact</button>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- الفورم -->
+<div class="form-popup" id="contactForm">
+  <div class="form-box">
+    <span onclick="closeForm()" class="close">&times;</span>
+
+    <h2>Contact Us</h2>
+
+    <input type="text" placeholder="Your Name">
+    <input type="email" placeholder="Your Email">
+    <input type="tel" placeholder="Phone Number">
+    <textarea placeholder="Your Message"></textarea>
+
+    <button>Send</button>
+  </div>
+</div>
+
+<section class="header-box">
+  <h4>Get a Custom Quote</h4>
+  <h1>Start Your Engineering Journey</h1>
+</section>
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("menu");
+  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+}
+</script>
+
+<script>
+function openForm() {
+  document.getElementById("contactForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("contactForm").style.display = "none";
+}
+</script>
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- اللوجو (شمال) -->
+    <div class="footer-logo">
+      <img src="logo.png" alt="Logo">
+    </div>
+
+    <!-- اللينكات (منتصف) -->
+    <div class="footer-links">
+
+      <!-- الصف الأول -->
+      <div class="footer-links-column">
+        <a href="index.html">Home</a>
+        <a href="adout.html">About us</a>
+        <a href="Products.html">Products</a>
+        <a href="industries.html">Industries</a>
+        <a href="Project.html">Projects</a>
+        <a href="quality.html">Quality</a>
+      </div>
+
+      <!-- الصف الثاني -->
+      <div class="footer-links-column">
+        <a href="caseers.html">Careers</a>
+        <a href="Contactus.html">Contact us</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+
+    </div>
+
+    <!-- العنوان والإيميل (يمين) -->
+    <div class="footer-contact">
+
+         <!-- Address -->
+      <div class="contact-item">
+        <span class="icon">📍</span>
+        <div>
+          <h4>Address</h4>
+          <p>Gamasa industrial City, Phase Four,Plot 27KZ</p>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="contact-item">
+        <span class="icon">✉️</span>
+        <div>
+          <h4>Email</h4>
+          <p>info@asgegy.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

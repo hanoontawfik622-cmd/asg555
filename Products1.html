@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<title>ASG</title>
+<style>
+
+body {
+  margin: 0;
+  font-family: 'bold', sans-serif;
+  direction: rtl;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'ge ss two family', sans-serif;
+}
+
+/* الهيدر */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  color: #1e3a8a; /* أزرق */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+/* الشمال */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu-icon {
+  font-size: 26px;
+  cursor: pointer;
+  color: #1e3a8a;
+}
+
+/* القائمة */
+.dropdown {
+  position: absolute;
+  top: 70px;
+  right: 20px;   /* بدل left */
+  left: auto;    /* مهم */
+  background: white;
+  padding: 15px;
+  display: none;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  text-align: right; /* يخلي الكلام مظبوط عربي */
+}
+
+.dropdown a {
+  color: #1e3a8a;
+  text-decoration: none;
+  padding: 8px 0;
+}
+
+.dropdown a:hover {
+  color: #60a5fa;
+}
+
+/* النص */
+.center {
+  display: flex;
+  gap: 30px;
+}
+
+.center a {
+  color: #1e3a8a;
+  text-decoration: none;
+  font-weight: 500;
+}
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* اللوجو على اليمين */
+    padding: 10px 50px; /* المسافة من الحافة اليمنى */
+}
+
+.logo img {
+    height: 50px;
+    display: block; /* مهم للظهور */
+}
+/* اللغة */
+.lang {
+  position: relative;
+  cursor: pointer;
+  color: #1e3a8a;
+}
+
+/* قائمة اللغة */
+.lang-menu {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  display: none;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.lang-menu a {
+  display: block;
+  color: #1e3a8a;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.lang-menu a:hover {
+  color: #60a5fa;
+}
+
+/* تظهر */
+.lang:hover .lang-menu {
+  display: block;
+}
+.header-box {
+  background-color: oklab(87.69500000000001% -0.01493 -0.05776); /* بيبي بلو */
+  padding: 50px 40px;
+  border-radius: 15px;
+
+  text-align: right; /* يخلي النص شمال */
+}
+/* H4 */
+.header-box h4 {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 10px;
+}
+/* H1 */
+.header-box h1 {
+  font-size: 36px;
+  color: #2563eb; /* أزرق */
+  font-weight: bold;
+}
+
+
+.footer {
+  background-color:  hwb(214 3% 47% / 0.982); /* أزرق فاتح */; /* أزرق فاتح */
+  padding: 40px 20px;
+  color: #ffffff;
+  font-family: 'ge ss two family', sans-serif;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* اللوجو */
+.footer-logo img {
+  width: 120px;
+}
+
+/* المنتصف - اللينكات */
+.footer-links {
+  display: flex;
+  gap: 40px; /* المسافة بين العمودين */
+  flex: 1;
+  justify-content: center;
+}
+
+.footer-links-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  color: hsl(0, 0%, 100%);
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  color: hwb(250 0% 40% / 0.71);
+}
+
+/* اليمين - Address & Email */
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: right;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.contact-item .icon {
+  font-size: 20px;
+  margin-top: 3px;
+}
+
+.contact-item h4 {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  margin-bottom: 3px;
+  font-size: 16px;
+}
+
+.contact-item p {
+  font-weight: 400;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Responsive للموبايل */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-links-column {
+    margin-bottom: 15px;
+  }
+
+  .footer-contact {
+    text-align: right;
+  }
+}
+
+
+.careers-section {
+  background: linear-gradient(135deg, hsl(224, 74%, 41%), hwb(221 34% 0%)); /* أزرق */
+  padding: 100px 20px;
+  text-align: center;
+  color: white;
+}
+
+/* السكشن كله شمال */
+.careers-section {
+  text-align: right;
+}
+
+/* Home / Careers */
+.breadcrumb {
+  font-size: 16px;
+  margin-bottom: 15px;
+  opacity: 0.8;
+}
+
+/* العنوان */
+.careers-section h1 {
+  font-size: 42px;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+
+/* الصورة */
+.image-box img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+
+  border-radius: 200px / 100px;
+}
+
+
+.services-section {
+  padding: 80px 10%;
+  text-align: center;
+}
+
+/* العنوان */
+.services-section .header h1 {
+  font-size: 40px;
+  color: #003366;
+}
+
+.services-section .header p {
+  color: #555;
+  margin-bottom: 50px;
+}
+
+/* الكروت */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 مربعات في الصف */
+  gap: 25px;
+}
+/* الكارت */
+.card {
+  border: 2px solid #003366;
+  padding: 20px;
+  border-radius: 12px;
+  transition: 0.3s;
+  background: #fff;
+}
+
+/* صورة */
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* hover */
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+}
+
+/* الزرار */
+.card button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: #003366;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* الفورم */
+.form-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.form-box {
+  background: #fff;
+  width: 350px;
+  margin: 100px auto;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.form-box input,
+.form-box textarea {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.form-box button {
+  background: #003366;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  width: 100%;
+}
+
+/* زرار القفل */
+.close {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+}
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+</style>
+</head>
+<body>
+<!-- HEADER -->
+<header class="navbar">
+
+  <!-- الشمال -->
+  <div class="left">
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <div class="dropdown" id="menu">
+      <a href="index1.html">الرئسية</a>
+      <a href="adout1.html">نبذة عنا </a>
+      <a href="Products1.html">المنتجات </a>
+      <a href="industries1.html">الصناعات </a>
+      <a href="Project1.html">المشاريع</a>
+      <a href="quality1.html">الجودة</a>
+    </div>
+
+    <!-- اللغة -->
+    <div class="lang">
+      🌐
+      <div class="lang-menu">
+        <a href="Products1.html">العربية</a>
+        <a href="Products.html">الانجليزية</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- النص في النص -->
+  <div class="center">
+    <a href="caseers1.html">الوظائف</a>
+    <a href="Contactus1.html">اتصل بنا</a>
+    <a href="faq1.html">التعليمات</a>
+  </div>
+
+  <!-- اليمين -->
+  <div class="container">
+    <div class="logo">
+        <img src="logo.png" alt="شعار الموقع">
+    </div>
+</div>
+</header>
+
+<section class="careers-section">
+  <div class="content">
+    
+    <p class="breadcrumb">المنتجات / الرئيسية</p>
+    
+    <h1>ماذا نقدم?</h1>
+    
+    <div class="image-box">
+      <img src="hero10.webp" alt="Team">
+    </div>
+
+  </div>
+</section>
+
+<section class="services-section" dir="rtl">
+
+  <!-- العنوان -->
+  <div class="header">
+    <h1>المنتجات المميزة</h1>
+    <p>تتخصص الشركة في تصنيع جميع معدات التكييف المركزي، بما في ذلك الصفائح المعدنية، الشبكات، وحوامل الكابلات.</p>
+  </div>
+
+  <!-- الكروت -->
+  <div class="cards">
+
+    <!-- كرري الكارت حسب الحاجة (15 كارت) -->
+    <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.46 PM.jpeg" alt="">
+      <h3>المجاري المستطيلة</h3>
+      <p>في شركة ASG للصناعات الهندسية،</p>
+      <p>تم تصميم المجاري المستطيلة بعناية</p>
+      <p>لتوفير توزيع هواء ممتاز</p>
+      <p>في مجموعة متنوعة من أنظمة التكييف.</p>
+      <br>
+      <button onclick="openForm()">تواصل معنا</button>
+    </div>
+
+    <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM.jpeg" alt="">
+      <h3>ملحقات المجاري</h3>
+      <p>مجموعة شاملة من ملحقات المجاري عالية الجودة،</p>
+      <p>بما في ذلك الأكواع، والتقسيمات، والتحولات والمخفضات،</p>
+      <p>مصممة لضمان تدفق الهواء المثالي وتقليل فقد الطاقة.</p>
+      <button onclick="openForm()">تواصل معنا</button>
+    </div>
+
+    <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (2).jpeg" alt="">
+      <h3>المجاري الحديدية المقاومة للحريق</h3>
+      <p>تتخصص ASG في تصنيع المجاري الحديدية المقاومة للحريق،</p>
+      <p>مصممة لتلبية أعلى معايير السلامة ضد الحرائق.</p>
+      <br><br><br>
+      <button onclick="openForm()">تواصل معنا</button>
+    </div>
+
+    <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (1).jpeg" alt="">
+      <h3>دعامات وحوامل المجاري</h3>
+      <p>في شركة ASG للصناعات الهندسية،</p>
+      <p>نقدم دعامات وحوامل مجاري قوية،</p>
+      <p>مصممة لتعليق ودعم المجاري المستديرة والمستطيلة</p>
+      <p>في أنظمة التكييف المركزي بشكل آمن.</p>
+      <button onclick="openForm()">تواصل معنا</button>
+    </div>
+
+    <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (3).jpeg" alt="">
+      <h3>مخمدات التحكم في الحجم</h3>
+      <p>شركة زمزم للصناعات الهندسية تقدم</p>
+      <p>مخمدات التحكم في الحجم عالية الدقة،</p>
+      <p>مصممة لتنظيم وتوازن تدفق الهواء</p>
+      <p>في أنظمة التكييف المركزي، مصنوعة من مواد عالية الجودة.</p>
+      <button onclick="openForm()">تواصل معنا</button>
+    </div>
+
+    <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (11).jpeg" alt="">
+      <h3>مخمدات تخفيف الضغط</h3>
+      <p>تتخصص ASG في تصنيع مخمدات تخفيف الضغط عالية الجودة،</p>
+      <p>مصممة لحماية أنظمة التكييف من حالات الضغط الزائد.</p>
+      <br><br>
+      <button onclick="openForm()">تواصل معنا</button>
+    </div>
+
+    <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (10).jpeg" alt="">
+      <h3>مخمدات منخفضة التسرب</h3>
+      <p>تقوم ASG بتصنيع مخمدات منخفضة التسرب عالية الأداء،</p>
+      <p>لتقليل تسرب الهواء وتحسين كفاءة أنظمة التكييف.</p>
+      <p>مصنوعة من مواد عالية الجودة مثل الفولاذ المجلفن أو الفولاذ المقاوم للصدأ.</p>
+      <button onclick="openForm()">تواصل معنا</button>
+    </div>
+
+    <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (9).jpeg" alt="">
+      <h3>المخمدات أحادية الاتجاه</h3>
+      <p>تصنع ASG مخمدات أحادية الاتجاه عالية الجودة،</p>
+      <p>مصممة لمنع عكس تدفق الهواء في أنظمة التكييف،</p>
+      <p>مما يضمن الحفاظ على تدفق الهواء في الاتجاه الصحيح.</p>
+      <button onclick="openForm()">تواصل معنا</button>
+    </div>
+
+    <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (8).jpeg" alt="">
+      <h3>مخمدات الفصل</h3>
+      <p>تقدم ASG مخمدات الفصل عالية الدقة،</p>
+      <p>مصممة لتقسيم وتوزيع تدفق الهواء في أنظمة التكييف.</p>
+      <br><br><br><br>
+      <button onclick="openForm()">تواصل معنا</button>
+    </div>
+
+    <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (7).jpeg" alt="">
+      <h3>مخمدات الحريق بشفرات الستارة</h3>
+      <p>تصنع ASG مخمدات الحريق بشفرات الستارة عالية الأداء،</p>
+      <p>لتوفير حماية حرائق حيوية في أنظمة التكييف.</p>
+      <button onclick="openForm()">تواصل معنا</button>
+    </div>
+
+    <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (6).jpeg" alt="">
+      <h3>مخمدات الحريق المؤتمتة</h3>
+      <p>توفر ASG مخمدات الحريق المؤتمتة عالية الجودة،</p>
+      <p>مصممة لتعزيز السلامة والاحتواء التلقائي للدخان والحريق في أنظمة التكييف.</p>
+      <button onclick="openForm()">تواصل معنا</button>
+    </div>
+
+    <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (5).jpeg" alt="">
+      <h3>مخمدات الدخان</h3>
+      <p>تصنع ASG مخمدات الدخان عالية الأداء،</p>
+      <p>مصممة للتحكم في حركة الدخان ومنع انتشاره في أنظمة التكييف أثناء الحرائق.</p>
+      <br>
+      <button onclick="openForm()">تواصل معنا</button>
+    </div>
+
+    <div class="card">
+      <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (4).jpeg" alt="">
+      <h3>مخمدات تجاوز VAV</h3>
+      <p>تصنع ASG مخمدات VAV (تدفق الهواء المتغير) عالية الأداء،</p>
+      <p>مصممة للحفاظ على تدفق الهواء الأمثل وضغط النظام في تطبيقات VAV.</p>
+      <button onclick="openForm()">تواصل معنا</button>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- الفورم -->
+<div class="form-popup" id="contactForm">
+  <div class="form-box">
+    <span onclick="closeForm()" class="close">&times;</span>
+
+    <h2>تواصل معنا</h2>
+
+    <input type="text" placeholder="الاسم">
+    <input type="email" placeholder="البريد الإلكتروني">
+    <input type="tel" placeholder="رقم الهاتف">
+    <textarea placeholder="رسالتك"></textarea>
+
+    <button>إرسال</button>
+  </div>
+</div>
+
+<section class="header-box">
+  <h4>احصل على عرض سعر مخصص</h4>
+  <h1>ابدأ رحلتك الهندسية</h1>
+</section>
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("menu");
+  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+}
+</script>
+
+<script>
+function openForm() {
+  document.getElementById("contactForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("contactForm").style.display = "none";
+}
+</script>
+
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- اللوجو (شمال) -->
+    <div class="footer-logo">
+      <img src="logo.png" alt="Logo">
+    </div>
+
+    <!-- اللينكات (منتصف) -->
+    <div class="footer-links">
+
+      <!-- الصف الأول -->
+      <div class="footer-links-column">
+        <a href="index1.html">الرئسية</a>
+        <a href="adout1.html">معلومات عنا</a>
+        <a href="Products1.html">المنتجات</a>
+        <a href="industries1.html">الصناعات</a>
+        <a href="Project1.html">المشاريع</a>
+        <a href="quality1.html">الجوده/a>
+      </div>
+
+      <!-- الصف الثاني -->
+      <div class="footer-links-column">
+        <a href="caseers1.html">الوظائف</a>
+        <a href="Contactus1.html">اتصل بينا</a>
+        <a href="faq1.html">التعليمات</a>
+      </div>
+
+    </div>
+
+    <!-- العنوان والإيميل (يمين) -->
+    <div class="footer-contact">
+
+         <!-- Address -->
+      <div class="contact-item">
+        <span class="icon">📍</span>
+        <div>
+          <h4>العنوان</h4>
+          <p>المدينة الصناعية بجمصة المرحلة الربعة قطعه 27 ك</p>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="contact-item">
+        <span class="icon">✉️</span>
+        <div>
+          <h4>الايميل</h4>
+          <p>info@asgegy.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
+
+

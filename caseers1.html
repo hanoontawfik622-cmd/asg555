@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<title>ASG</title>
+<style>
+
+body {
+  margin: 0;
+  font-family: 'bold', sans-serif;
+  direction: rtl;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'ge ss two family', sans-serif;
+}
+
+/* الهيدر */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  color: #1e3a8a; /* أزرق */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+/* الشمال */
+.left {
+  display: flex;           /* عناصر في صف واحد */
+  align-items: center;     /* محاذاة عمودية وسط */
+  gap: 15px;               /* المسافة بينهم */
+  position: relative;      /* مهم للـ dropdowns */
+}
+
+/* أيقونة القائمة */
+.menu-icon {
+  font-size: 26px;
+  cursor: pointer;
+  color: #1e3a8a;
+}
+
+/* أيقونة اللغة */
+.lang {
+  font-size: 22px;
+  cursor: pointer;
+  color: #1e3a8a;
+  position: relative;       /* لعمل القائمة المنسدلة */
+}
+
+/* Dropdown اللغة */
+.lang-menu {
+  display: none;
+  position: absolute;
+  top: 35px;               /* يظهر أسفل أيقونة اللغة مباشرة */
+  left: 0;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  z-index: 1000;           /* فوق باقي العناصر */
+}
+
+.lang-menu a {
+  display: block;
+  padding: 5px 10px;
+  color: #1e3a8a;
+  text-decoration: none;
+}
+
+.lang:hover .lang-menu {
+  display: block;
+}
+
+/* Dropdown القائمة */
+.dropdown {
+  position: absolute;
+  top: 70px;   /* يظهر أسفل الهيدر */
+  left: 0;
+  background: white;
+  padding: 15px;
+  display: none;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+.dropdown a {
+  color: #1e3a8a;
+  text-decoration: none;
+  padding: 8px 0;
+}
+
+.dropdown a:hover {
+  color: #60a5fa;
+}
+
+/* النص */
+.center {
+  display: flex;
+  gap: 30px;
+}
+
+.center a {
+  color: #1e3a8a;
+  text-decoration: none;
+  font-weight: 500;
+}
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* اللوجو على اليمين */
+    padding: 10px 50px; /* المسافة من الحافة اليمنى */
+}
+
+.logo img {
+    height: 50px;
+    display: block; /* مهم للظهور */
+}
+/* اللغة */
+.lang {
+  position: relative;
+  cursor: pointer;
+  color: #1e3a8a;
+}
+
+/* قائمة اللغة */
+.lang-menu {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  display: none;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.lang-menu a {
+  display: block;
+  color: #1e3a8a;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.lang-menu a:hover {
+  color: #60a5fa;
+}
+
+/* تظهر */
+.lang:hover .lang-menu {
+  display: block;
+}
+.header-box {
+  background-color: oklab(87.69500000000001% -0.01493 -0.05776); /* بيبي بلو */
+  padding: 50px 40px;
+  border-radius: 15px;
+
+  text-align: right; /* يخلي النص شمال */
+}
+/* H4 */
+.header-box h4 {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 10px;
+}
+/* H1 */
+.header-box h1 {
+  font-size: 36px;
+  color: #2563eb; /* أزرق */
+  font-weight: bold;
+}
+
+
+.footer {
+  background-color:  hwb(214 3% 47% / 0.982); /* أزرق فاتح */; /* أزرق فاتح */
+  padding: 40px 20px;
+  color: #ffffff;
+  font-family: 'ge ss two family', sans-serif;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* اللوجو */
+.footer-logo img {
+  width: 120px;
+}
+
+/* المنتصف - اللينكات */
+.footer-links {
+  display: flex;
+  gap: 40px; /* المسافة بين العمودين */
+  flex: 1;
+  justify-content: center;
+}
+
+.footer-links-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  color: hsl(0, 0%, 100%);
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  color: hwb(250 0% 40% / 0.71);
+}
+
+/* اليمين - Address & Email */
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: right;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.contact-item .icon {
+  font-size: 20px;
+  margin-top: 3px;
+}
+
+.contact-item h4 {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  margin-bottom: 3px;
+  font-size: 16px;
+}
+
+.contact-item p {
+  font-weight: 400;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Responsive للموبايل */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-links-column {
+    margin-bottom: 15px;
+  }
+
+  .footer-contact {
+    text-align: right;
+  }
+}
+
+.careers-section {
+  background: linear-gradient(135deg, hsl(224, 74%, 41%), hsl(221, 90%, 62%)); /* أزرق */
+  padding: 100px 20px;
+  text-align: center;
+  color: white;
+}
+
+/* السكشن كله شمال */
+.careers-section {
+  text-align:right;
+}
+
+/* Home / Careers */
+.breadcrumb {
+  font-size: 16px;
+  margin-bottom: 15px;
+  opacity: 0.8;
+}
+
+/* العنوان */
+.careers-section h1 {
+  font-size: 42px;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+
+/* الصورة */
+.image-box img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+
+  border-radius: 200px / 100px;
+}
+
+/* الخلفية */
+.jobs-section {
+  background: #e0f2fe; /* بيبي بلو */
+  padding: 80px 20px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+/* الشمال: H1 و P */
+.left {
+  display: flex;
+  flex-direction: column; /* تحت بعض */
+  align-items: flex-start;
+}
+.left h1 {
+  color: #2563eb;
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+.left p {
+  font-size: 18px;
+  color: #333;
+}
+
+/* اليمين: البحث + Filter */
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* في منتصف العمود */
+  align-items: flex-start;
+  width: 350px;
+}
+
+/* الحاوية للبحث والفلتر جنب بعض */
+.search-filter {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+/* البحث */
+.search-box input {
+  flex: 1; /* ياخد أكبر مساحة ممكنة */
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* زرار Filter */
+.filter-btn {
+  padding: 10px 20px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* القائمة مخفية افتراضياً */
+.filter-menu {
+  display: none;
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.group h4 {
+  margin-bottom: 10px;
+  color: #2563eb;
+}
+.group label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* زرار Clear */
+.clear-btn {
+  width: 100%;
+  padding: 10px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* Pagination في النص */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 40px;
+}
+
+.pagination span {
+  display: inline-block;
+  padding: 10px 15px;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.pagination .active {
+  background: #2563eb;
+  color: white;
+}
+
+.values-section {
+  text-align: center;
+  padding: 80px 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.values-section h2 {
+  color: #2563eb;
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.values-section p {
+  color: #555;
+  font-size: 18px;
+  margin-bottom: 50px;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* عمودين دائمًا */
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.value-card {
+  background: #f1f5f9;
+  padding: 25px;
+  border-radius: 20px;
+  text-align: right;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.icon-box {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #2563eb;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2563eb;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.value-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.value-card p {
+  font-size: 14px;
+  color: #555;
+}
+@media (max-width: 600px) {
+  .values-grid {
+    grid-template-columns: 1fr; /* عمود واحد على الشاشات الصغيرة */
+  }
+}
+</style>
+</head>
+<body>
+<!-- HEADER -->
+<header class="navbar">
+
+  <!-- الشمال -->
+  <div class="right">
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <div class="dropdown" id="menu">
+      <a href="index1.html">الرئسية</a>
+      <a href="adout1.html">نبذة عنا </a>
+      <a href="Products1.html">المنتجات </a>
+      <a href="industries1.html">الصناعات </a>
+      <a href="Project1.html">المشاريع</a>
+      <a href="quality1.html">الجودة</a>
+    </div>
+
+    <!-- اللغة -->
+    <div class="lang">
+      🌐
+      <div class="lang-menu">
+        <a href="caseers1.html">العربية</a>
+        <a href="caseers.html">الانجليزية</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- النص في النص -->
+  <div class="center">
+    <a href="caseers1.html">الوظائف</a>
+    <a href="Contactus1.html">اتصل بنا</a>
+    <a href="faq1.html">التعليمات</a>
+  </div>
+
+  <!-- اليمين -->
+  <div class="container">
+    <div class="logo">
+        <img src="logo.png" alt="شعار الموقع">
+    </div>
+</div>
+</header>
+
+<section class="careers-section">
+  <div class="content">
+    
+    <p class="breadcrumb">الرئيسية / الوظائف</p>
+    
+    <h1> انضم إلى فريقنا </h1>
+    
+    <div class="image-box">
+      <img src="hero.webp" alt="Team">
+    </div>
+  </div>
+</section>
+
+<section class="jobs-section">
+
+  <div class="container">
+
+    <!-- الشمال: H1 و P -->
+    <div class="left">
+      <h1>ابحث عن مسارك المهني</h1>
+      <p>اكتشف فرص العمل المتاحة لدينا للمحترفين</p>
+    </div>
+
+    <!-- اليمين: البحث + Filter -->
+    <div class="right">
+
+      <div class="search-filter">
+        <div class="search-box">
+          <input type="text" placeholder="Search...">
+        </div>
+
+        <div class="filter-box">
+          <button class="filter-btn" onclick="toggleFilter()"> ▼ تصفية</button>
+
+          <div class="filter-menu" id="filterMenu">
+            <!-- Departments -->
+            <div class="group">
+              <h4>الاقسام</h4>
+              <label><input type="checkbox"> هندسة</label>
+              <label><input type="checkbox"> هندسة البرمجيات</label>
+            </div>
+
+            <!-- Types -->
+            <div class="group">
+              <h4>الانواع</h4>
+              <label><input type="checkbox"> دوام كامل</label>
+              <label><input type="checkbox"> دوام جزائي</label>
+              <label><input type="checkbox">تدريب داخلي</label>
+            </div>
+
+            <button class="clear-btn">مسح جميع التطبيقات</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <span>&lt;&lt;</span>
+    <span class="active">1</span>
+    <span>&gt;&gt;</span>
+  </div>
+
+</section>
+
+<section class="values-section">
+  <h2>قيم ASG</h2>
+  <p>لا تقتصر أهمية العمل التجاري على النتائج فحسب، بل تشمل أيضاً الأشخاص.</p>
+
+  <div class="values-grid">
+    <div class="value-card">
+      <div class="icon-box">🔭</div>
+      <h3>التركيز على المستهلك</h3>
+      <p>إن المستهلكين والعملاء هم جوهر أعمالنا.</p>
+    </div>
+
+    <div class="value-card">
+      <div class="icon-box">👥</div>
+      <h3>العمل الجماعي</h3>
+      <p>نحن نؤمن بأننا لا نستطيع تحقيق نتائج أعمال متميزة إلا بوجود الأشخاص المناسبين.</p>
+    </div>
+
+    <div class="value-card">
+      <div class="icon-box">🏅</div>
+      <h3>المساءلة</h3>
+      <p>نحن نفعل ما نقول إننا سنفعله، ونتحمل مسؤولية أفعالنا.</p>
+    </div>
+
+    <div class="value-card">
+      <div class="icon-box">📈</div>
+      <h3>أداء</h3>
+      <p>.نحن متحمسون لزيادة القيمة في كل ما نقوم به</p>
+    </div>
+  </div>
+</section>
+
+<section class="header-box">
+  <h4>احصل على عرض سعر مخصص</h4>
+  <h1>ابدأ رحلتك الهندسية</h1>
+</section>
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("menu");
+  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+}
+</script>
+<script>
+function toggleFilter() {
+  const menu = document.getElementById("filterMenu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+</script>
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- اللوجو (شمال) -->
+    <div class="footer-logo">
+      <img src="logo.png" alt="Logo">
+    </div>
+
+    <!-- اللينكات (منتصف) -->
+    <div class="footer-links">
+
+      <!-- الصف الأول -->
+      <div class="footer-links-column">
+        <a href="index1.html">الرئسية</a>
+        <a href="adout1.html">معلومات عنا</a>
+        <a href="Products1.html">المنتجات</a>
+        <a href="industries1.html">الصناعات</a>
+        <a href="Project1.html">المشاريع</a>
+        <a href="quality1.html">الجوده/a>
+      </div>
+
+      <!-- الصف الثاني -->
+      <div class="footer-links-column">
+        <a href="caseers1.html">الوظائف</a>
+        <a href="Contactus1.html">اتصل بينا</a>
+        <a href="faq1.html">التعليمات</a>
+      </div>
+
+    </div>
+
+    <!-- العنوان والإيميل (يمين) -->
+    <div class="footer-contact">
+
+          <!-- Address -->
+      <div class="contact-item">
+        <span class="icon">📍</span>
+        <div>
+          <h4>العنوان</h4>
+          <p>المدينة الصناعية بجمصة المرحلة الربعة قطعه 27 ك</p>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="contact-item">
+        <span class="icon">✉️</span>
+        <div>
+          <h4>الايميل</h4>
+          <p>info@asgegy.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

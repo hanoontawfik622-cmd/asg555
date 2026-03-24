@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<title>ASG</title>
+<style>
+
+body {
+  margin: 0;
+  font-family: 'bold', sans-serif;
+  direction: rtl;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'ge ss two family', sans-serif;
+}
+
+/* الهيدر */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  color: #1e3a8a; /* أزرق */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+/* الشمال */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu-icon {
+  font-size: 26px;
+  cursor: pointer;
+  color: #1e3a8a;
+}
+
+/* القائمة */
+.dropdown {
+  position: absolute;
+  top: 70px;
+  right: 20px;   /* بدل left */
+  left: auto;    /* مهم */
+  background: white;
+  padding: 15px;
+  display: none;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  text-align: right; /* يخلي الكلام مظبوط عربي */
+}
+
+.dropdown a {
+  color: #1e3a8a;
+  text-decoration: none;
+  padding: 8px 0;
+}
+
+.dropdown a:hover {
+  color: #60a5fa;
+}
+
+/* النص */
+.center {
+  display: flex;
+  gap: 30px;
+}
+
+.center a {
+  color: #1e3a8a;
+  text-decoration: none;
+  font-weight: 500;
+}
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* اللوجو على اليمين */
+    padding: 10px 50px; /* المسافة من الحافة اليمنى */
+}
+
+.logo img {
+    height: 50px;
+    display: block; /* مهم للظهور */
+}
+/* اللغة */
+.lang {
+  position: relative;
+  cursor: pointer;
+  color: #1e3a8a;
+}
+
+/* قائمة اللغة */
+.lang-menu {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  display: none;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.lang-menu a {
+  display: block;
+  color: #1e3a8a;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.lang-menu a:hover {
+  color: #60a5fa;
+}
+
+/* تظهر */
+.lang:hover .lang-menu {
+  display: block;
+}
+.header-box {
+  background-color: oklab(87.69500000000001% -0.01493 -0.05776); /* بيبي بلو */
+  padding: 50px 40px;
+  border-radius: 15px;
+
+  text-align: right; /* يخلي النص شمال */
+}
+/* H4 */
+.header-box h4 {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 10px;
+}
+/* H1 */
+.header-box h1 {
+  font-size: 36px;
+  color: #2563eb; /* أزرق */
+  font-weight: bold;
+}
+
+
+.footer {
+  background-color:  hwb(214 3% 47% / 0.982); /* أزرق فاتح */; /* أزرق فاتح */
+  padding: 40px 20px;
+  color: #ffffff;
+  font-family: 'ge ss two family', sans-serif;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* اللوجو */
+.footer-logo img {
+  width: 120px;
+}
+
+/* المنتصف - اللينكات */
+.footer-links {
+  display: flex;
+  gap: 40px; /* المسافة بين العمودين */
+  flex: 1;
+  justify-content: center;
+}
+
+.footer-links-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  color: hsl(0, 0%, 100%);
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  color: hwb(250 0% 40% / 0.71);
+}
+
+/* اليمين - Address & Email */
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: right;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.contact-item .icon {
+  font-size: 20px;
+  margin-top: 3px;
+}
+
+.contact-item h4 {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  margin-bottom: 3px;
+  font-size: 16px;
+}
+
+.contact-item p {
+  font-weight: 400;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Responsive للموبايل */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-links-column {
+    margin-bottom: 15px;
+  }
+
+  .footer-contact {
+    text-align: right;
+  }
+}
+
+.careers-section {
+  background: linear-gradient(135deg, hsl(224, 64%, 39%), hsl(221, 100%, 64%)); /* أزرق */
+  padding: 100px 20px;
+  text-align: right;
+  color: white;
+}
+
+
+/* Home / Careers */
+.breadcrumb {
+  font-size: 16px;
+  margin-bottom: 15px;
+  opacity: 0.8;
+}
+
+/* العنوان */
+.careers-section h1 {
+  font-size: 42px;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+
+/* الصورة */
+.image-box img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+
+  border-radius: 200px / 100px;
+}
+
+
+
+/* --- السكشن --- */
+.hvac-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px 100px;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+/* --- الشمال --- */
+.hvac-left {
+  flex: 1;
+  max-width: 500px;
+}
+
+.hvac-left h5 {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.hvac-left h1 {
+  font-size: 40px;
+  color: #1e3a8a; /* أزرق */
+  margin-bottom: 20px;
+}
+
+.hvac-left p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* --- اليمين (الصورة) --- */
+.hvac-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* الصورة الدائرية */
+.hvac-right img {
+  width: 320px;
+  height: 320px;
+  border-radius: 80%; /* دائرة */
+  object-fit: cover;
+  border: 6px solid #1e3a8a; /* إطار أزرق */
+  animation: float 3s ease-in-out infinite; /* حركة */
+}
+
+/* حركة خفيفة */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .hvac-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 50px 20px;
+  }
+
+  .hvac-left, .hvac-right {
+    max-width: 100%;
+  }
+
+  .hvac-right img {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+
+/* --- السكشن --- */
+.healthcare-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px 100px;
+  gap: 50px;
+  flex-wrap: wrap;
+  background: #cce7ff; /* Baby Blue */
+}
+
+/* --- الشمال (الصورة) --- */
+.healthcare-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* الصورة الدائرية */
+.healthcare-left img {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid #1e3a8a;
+
+  /* حركة */
+  animation: float 3s ease-in-out infinite;
+
+  /* تأثير ظل */
+  box-shadow: 0 0 25px rgba(30, 58, 138, 0.4);
+}
+
+/* حركة */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+/* --- اليمين (النص) --- */
+.healthcare-right {
+  flex: 1;
+  max-width: 500px;
+}
+
+.healthcare-right h5 {
+  font-size: 20px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.healthcare-right h1 {
+  font-size: 38px;
+  color: #1e3a8a;
+  margin-bottom: 20px;
+}
+
+.healthcare-right p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .healthcare-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 50px 20px;
+  }
+
+  .healthcare-right {
+    max-width: 100%;
+  }
+
+  .healthcare-left img {
+    width: 250px;
+    height: 250px;
+  }
+}
+</style>
+</head>
+<body>
+<!-- HEADER -->
+<header class="navbar">
+
+  <!-- الشمال -->
+  <div class="left">
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <div class="dropdown" id="menu">
+      <a href="index1.html">الرئسية</a>
+      <a href="adout1.html">نبذة عنا </a>
+      <a href="Products1.html">المنتجات </a>
+      <a href="industries1.html">الصناعات </a>
+      <a href="Project1.html">المشاريع</a>
+      <a href="quality1.html">الجودة</a>
+    </div>
+
+    <!-- اللغة -->
+    <div class="lang">
+      🌐
+      <div class="lang-menu">
+        <a href="industries1.html">العربية</a>
+        <a href="industries.html">الانجليزية</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- النص في النص -->
+  <div class="center">
+    <a href="caseers1.html">الوظائف</a>
+    <a href="Contactus1.html">اتصل بنا</a>
+    <a href="faq1.html">التعليمات</a>
+  </div>
+
+  <!-- اليمين -->
+  <div class="container">
+    <div class="logo">
+        <img src="logo.png" alt="شعار الموقع">
+    </div>
+</div>
+</header>
+
+<section class="careers-section">
+  <div class="content">
+    
+    <p class="breadcrumb">الرئيسية / الصناعات</p>
+    
+    <h1>الصناعات التي نخدمها</h1>
+    
+    <div class="image-box">
+      <img src="hero1.webp" alt="فريق العمل">
+    </div>
+  </div>
+</section>
+
+<div class="hvac-section">
+
+  <!-- الشمال -->
+  <div class="hvac-left">
+    <h5>المجمعات السكنية</h5>
+    <h1>أنظمة التكييف والتهوية</h1>
+    <p>
+      نوفر للمنازل والمجتمعات أنظمة تبريد وتهوية موثوقة، مصممة لتحقيق أداء طويل الأمد وكفاءة في استهلاك الطاقة، مع توفير أقصى درجات الراحة للأسرة.
+    </p>
+  </div>
+
+  <!-- اليمين -->
+  <div class="hvac-right">
+    <img src="01K6T5Z5JT607PA62GXVWZAYPJ.webp" alt="أنظمة التكييف">
+  </div>
+</div>
+
+<div class="healthcare-section">
+  <!-- الصورة -->
+  <div class="healthcare-left">
+    <img src="01K6T5ZM8X8CP3Q7H3BQT8Z6A6.webp" alt="الرعاية الصحية">
+  </div>
+  <!-- النص -->
+  <div class="healthcare-right">
+    <h5>02</h5>
+    <h1>الرعاية الصحية والمختبرات</h1>
+    <p>
+      نقدم حلولًا متخصصة للمستشفيات والعيادات والمختبرات، مع ضمان بيئات معقمة، وتنظيم دقيق لدرجات الحرارة، وأنظمة متقدمة لتنقية الهواء.
+    </p>
+  </div>
+</div>
+<div class="hvac-section">
+
+  <!-- الشمال -->
+  <div class="hvac-left">
+    <h5>03</h5>
+    <h1>المباني التجارية</h1>
+    <p>
+      من أبراج المكاتب إلى مراكز التسوق، تقدم زمزم حلول تكييف وتهوية فعالة تضمن الراحة وجودة الهواء وتقليل التكاليف في البيئات ذات الكثافة العالية.
+    </p>
+  </div>
+
+  <!-- اليمين -->
+  <div class="hvac-right">
+    <img src="01K6T600N87Q2BJZEYKJ9K39SP.webp" alt="أنظمة التكييف">
+  </div>
+</div>
+
+
+<div class="healthcare-section">
+
+  <!-- الصورة -->
+  <div class="healthcare-left">
+    <img src="01K6T60D8CE7NHQJYFSN867BKK.webp" alt="المنشآت الصناعية">
+  </div>
+
+  <!-- النص -->
+  <div class="healthcare-right">
+    <h5>04</h5>
+    <h1>المنشآت الصناعية</h1>
+    <p>
+      أنظمة تكييف وتهوية مصممة خصيصًا للمصانع والمخازن وخطوط الإنتاج، حيث تتطلب تحكمًا دقيقًا في المناخ، ومتانة عالية، والالتزام بمعايير الصناعة.
+    </p>
+  </div>
+</div>
+
+<section class="header-box">
+  <h4>احصل على عرض سعر مخصص</h4>
+  <h1>ابدأ رحلتك الهندسية</h1>
+</section>
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("menu");
+  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+}
+</script>
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- اللوجو (شمال) -->
+    <div class="footer-logo">
+      <img src="logo.png" alt="Logo">
+    </div>
+
+    <!-- اللينكات (منتصف) -->
+    <div class="footer-links">
+
+      <!-- الصف الأول -->
+      <div class="footer-links-column">
+        <a href="index1.html">الرئسية</a>
+        <a href="adout1.html">معلومات عنا</a>
+        <a href="Products1.html">المنتجات</a>
+        <a href="industries1.html">الصناعات</a>
+        <a href="Project1.html">المشاريع</a>
+        <a href="quality1.html">الجوده/a>
+      </div>
+
+      <!-- الصف الثاني -->
+      <div class="footer-links-column">
+        <a href="caseers1.html">الوظائف</a>
+        <a href="Contactus1.html">اتصل بينا</a>
+        <a href="faq1.html">التعليمات</a>
+      </div>
+
+    </div>
+
+    <!-- العنوان والإيميل (يمين) -->
+    <div class="footer-contact">
+
+          <!-- Address -->
+      <div class="contact-item">
+        <span class="icon">📍</span>
+        <div>
+          <h4>العنوان</h4>
+          <p>المدينة الصناعية بجمصة المرحلة الربعة قطعه 27 ك</p>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="contact-item">
+        <span class="icon">✉️</span>
+        <div>
+          <h4>الايميل</h4>
+          <p>info@asgegy.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

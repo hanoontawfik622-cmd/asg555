@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<title>ASG</title>
+<style>
+
+body {
+  margin: 0;
+  font-family: 'bold', sans-serif;
+  direction: rtl;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'ge ss two family', sans-serif;
+}
+
+/* الهيدر */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  color: #1e3a8a; /* أزرق */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+/* الشمال */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu-icon {
+  font-size: 26px;
+  cursor: pointer;
+  color: #1e3a8a;
+}
+
+/* القائمة */
+.dropdown {
+  position: absolute;
+  top: 70px;
+  right: 20px;   /* بدل left */
+  left: auto;    /* مهم */
+  background: white;
+  padding: 15px;
+  display: none;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  text-align: right; /* يخلي الكلام مظبوط عربي */
+}
+
+.dropdown a {
+  color: #1e3a8a;
+  text-decoration: none;
+  padding: 8px 0;
+}
+
+.dropdown a:hover {
+  color: #60a5fa;
+}
+
+/* النص */
+.center {
+  display: flex;
+  gap: 30px;
+}
+
+.center a {
+  color: #1e3a8a;
+  text-decoration: none;
+  font-weight: 500;
+}
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* اللوجو على اليمين */
+    padding: 10px 50px; /* المسافة من الحافة اليمنى */
+}
+
+.logo img {
+    height: 50px;
+    display: block; /* مهم للظهور */
+}
+/* اللغة */
+.lang {
+  position: relative;
+  cursor: pointer;
+  color: #1e3a8a;
+}
+
+/* قائمة اللغة */
+.lang-menu {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  display: none;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.lang-menu a {
+  display: block;
+  color: #1e3a8a;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.lang-menu a:hover {
+  color: #60a5fa;
+}
+
+/* تظهر */
+.lang:hover .lang-menu {
+  display: block;
+}
+
+.hero {
+     position: relative;
+     width: 100%;
+     height: 100vh;
+     overflow: hidden;
+     }
+/* الصورة */ 
+.hero img { 
+    width: 100%;
+     height: 100%;
+      object-fit: cover;
+     }
+/* الطبقة الشفافة */
+ .overlay { position: absolute;
+     top: 0;
+      left: 0; 
+      width: 100%;
+       height: 100%;
+       background: rgba(0, 0, 0, 0.5);
+     }
+    /* النص */ 
+    .hero-text { position: absolute;
+         top: 50%; left: 50%;
+          transform: translate(-50%, -50%); 
+          color: white;
+           text-align: center;
+         } 
+         .hero-text h3 { font-size: 20px;
+             margin-bottom: 15px;
+              font-weight: 400;
+             } 
+         .hero-text h1 { font-size: 48px;
+             line-height: 1.4; 
+             font-weight: bold
+            }
+
+.about-section {
+  display: flex;
+  flex-direction: row; /* بدل column نخليها row */
+  align-items: center;  /* توسيط رأسياً */
+  justify-content: space-between; /* المسافة بين الكلام والصورة */
+  gap: 40px; /* المسافة بين العمودين */
+  padding: 50px 20px;
+  text-align: right; /* الكلام على الشمال */
+  flex-wrap: wrap; /* عشان يكون متجاوب على الشاشات الصغيرة */
+}
+
+.content {
+  flex: 1; /* الكلام ياخد مساحة */
+  max-width: 600px; /* أقصى عرض للكلام */
+}
+
+.content h2 {
+  font-size: 36px;
+  color: #2a6edb;
+}
+
+.content p {
+  margin: 20px 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.learn-more {
+  padding: 12px 30px;
+  background-color: #2a6edb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.image-circle {
+  flex: 1; /* الصورة تاخد مساحة متساوية */
+  max-width: 300px; 
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.image-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.section {
+    background-color: hwb(218 28% 2%);
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: nowrap; /* يخليهم جنب بعض */
+    overflow-x: auto; /* لو الشاشة صغيرة يعمل سكرول */
+}
+
+.card {
+    background: #fff;
+    min-width: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px #fafafa;
+    padding-bottom: 15px;
+
+    /* الحركة */
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 10px 20px #f5f4f4;
+}
+
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+/* الزرار */
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: hsl(220, 68%, 51%);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: hsl(224, 85%, 49%);
+}
+
+
+.custom-section {
+  position: relative;
+  background: url('148281.jpg') center/cover no-repeat;
+  width: 100%;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-section .overlay {
+  background-color: rgba(255, 255, 255, 0.7); /* طبقة شفافة */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-section .content {
+  display: flex;
+  max-width: 1200px;
+  width: 90%;
+  gap: 50px;
+  align-items: center;
+}
+
+.custom-section .text-side {
+  flex: 1;
+}
+
+.custom-section .text-side h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.custom-section .text-side p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.custom-section .text-side ul {
+  list-style: disc inside;
+  margin-bottom: 20px;
+}
+
+.custom-section .text-side button {
+  padding: 10px 25px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.custom-section .image-side {
+  flex: 1;
+}
+
+.custom-section .image-side img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.custom-section .text-side h1,
+.custom-section .text-side ul {
+  color: hsl(229, 98%, 43%); /* اللون الأزرق */
+}
+
+.custom-section .text-side ul li {
+  margin-bottom: 10px; /* مسافة بين العناصر */
+}
+
+.custom-section .text-side button {
+  padding: 10px 25px;
+  background-color: #007BFF; /* زر أزرق */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  transition: 0.3s;
+}
+.custom-section .text-side button:hover {
+  background-color: #0056b3; /* لون أغمق عند المرور */
+}
+.two-columns {
+    display: flex;
+    flex-wrap: wrap; /* يسمح بالانتقال للسطر التالي */
+    gap: 20px; /* المسافة بين العناصر */
+    padding-left: 20px; /* المسافة من اليسار للنقاط */
+}
+
+.two-columns li {
+    flex: 0 0 45%; /* كل عنصر يأخذ تقريبًا نصف العرض */
+    margin-bottom: 10px;
+    list-style: disc; /* تظهر النقطة */
+}
+
+
+
+.card-section {
+  width: 90%;
+  margin: 50px auto;
+  font-family: 'ge ss two family', sans-serif;
+
+  background-color: hwb(213 82% 3%); /* لبني فاتح */
+  padding: 30px;
+  border-radius: 20px;
+}
+/* الصورة */
+.image-box img {
+  width: 100%;
+  border-radius: 15px;
+  display: block;
+}
+
+/* المحتوى تحت الصورة */
+.content-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+/* النص */
+.text {
+  max-width: 70%;
+}
+
+.text h5 {
+  font-size: 16px;
+  color: #777;
+  margin-bottom: 5px;
+}
+
+.text h1 {
+  font-size: 32px;
+  color: #2563eb; /* أزرق */
+  margin-bottom: 10px;
+}
+
+.text p {
+  font-size: 15px;
+  color: #444;
+}
+
+/* الزرار */
+.button-box {
+  margin-top: 10px;
+}
+
+.btn {
+  background-color: #2563eb;
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #1e40af;
+}
+
+
+
+.gallery {
+  width: 90%;
+  margin: 60px auto;
+  text-align: center;
+}
+
+.gallery h3 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: hsla(0, 0%, 6%, 0.514); /* أزرق */
+}
+
+/* السلايدر */
+.slider {
+  overflow: hidden;
+  position: relative;
+}
+
+.slide-track {
+  display: flex;
+  width: calc(250px * 12); /* 6 صور × 2 */
+  animation: scroll 20s linear infinite;
+}
+
+/* الصور */
+.slide-track img {
+  width: 250px;
+  height: 160px;
+  object-fit: cover;
+  margin: 0 10px;
+  border-radius: 15px;
+}
+
+/* الحركة */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+
+.header-box {
+  background-color: oklab(87.69500000000001% -0.01493 -0.05776); /* بيبي بلو */
+  padding: 50px 40px;
+  border-radius: 15px;
+
+  text-align: left; /* يخلي النص شمال */
+}
+/* H4 */
+.header-box h4 {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 10px;
+}
+/* H1 */
+.header-box h1 {
+  font-size: 36px;
+  color: #2563eb; /* أزرق */
+  font-weight: bold;
+}
+
+
+.footer {
+  background-color:  hwb(214 3% 47% / 0.982); /* أزرق فاتح */; /* أزرق فاتح */
+  padding: 40px 20px;
+  color: #ffffff;
+  font-family: 'ge ss two family', sans-serif;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* اللوجو */
+.footer-logo img {
+  width: 120px;
+}
+
+/* المنتصف - اللينكات */
+.footer-links {
+  display: flex;
+  gap: 40px; /* المسافة بين العمودين */
+  flex: 1;
+  justify-content: center;
+}
+
+.footer-links-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  color: hsl(0, 0%, 100%);
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  color: hwb(250 0% 40% / 0.71);
+}
+
+/* اليمين - Address & Email */
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: left;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.contact-item .icon {
+  font-size: 20px;
+  margin-top: 3px;
+}
+
+.contact-item h4 {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  margin-bottom: 3px;
+  font-size: 16px;
+}
+
+.contact-item p {
+  font-weight: 400;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Responsive للموبايل */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-links-column {
+    margin-bottom: 15px;
+  }
+
+  .footer-contact {
+    text-align: left;
+  }
+}
+</style>
+</head>
+<body>
+<!-- HEADER -->
+<header class="navbar">
+
+  <!-- الشمال -->
+  <div class="left">
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <div class="dropdown" id="menu">
+      <a href="index1.html">الرئسية</a>
+      <a href="adout1.html">نبذة عنا </a>
+      <a href="Products1.html">المنتجات </a>
+      <a href="industries1.html">الصناعات </a>
+      <a href="Project1.html">المشاريع</a>
+      <a href="quality1.html">الجودة</a>
+    </div>
+
+    <!-- اللغة -->
+    <div class="lang">
+      🌐
+      <div class="lang-menu">
+        <a href="index1.html">العربية</a>
+        <a href="index.html">الانجليزية</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- النص في النص -->
+  <div class="center">
+    <a href="caseers1.html">الوظائف</a>
+    <a href="Contactus1.html">اتصل بنا</a>
+    <a href="faq1.html">التعليمات</a>
+  </div>
+
+  <!-- اليمين -->
+  <div class="container">
+    <div class="logo">
+        <img src="logo.png" alt="شعار الموقع">
+    </div>
+</div>
+</header>
+
+<div class="hero">
+
+  <!-- الصورة -->
+  <img src="ChatGPT Image Mar 22, 2026, 10_33_43 AM.png" alt="bg">
+
+  <!-- طبقة شفافة -->
+  <div class="overlay"></div>
+
+  <!-- النص -->
+  <div class="hero-text">
+    <h3>شركة ASG للصناعات الهندسية</h3>
+    <h1>ابتكار مستقبل<br>الصناعات الهندسية</h1>
+  </div>
+
+</div>
+
+<section class="about-section">
+  <div class="content">
+    <h4>من هي مجموعة ASG؟</h4>
+    <h2>مستقبل الصناعات الهندسية</h2>
+    <p>
+    تأسست شركة ASG للصناعات الهندسية في مصر عام ٢٠٠٢. بدأنا بخط إنتاج ألماني متكامل لتصنيع قنوات التكييف والتهوية الحلزونية الدائرية وملحقاتها. ومع مرور الوقت، توسعت تشكيلة منتجاتنا لتشمل مجموعة واسعة من المنتجات، مثل قنوات التكييف والتهوية (دائرية ومستطيلة) المصنوعة من الفولاذ الأسود، والفولاذ المجلفن، والفولاذ المقاوم للصدأ، والألومنيوم، بالإضافة إلى مخارج الهواء، والمخمدات، وكاتمات الصوت، وصناديق التوصيل، ووحدات التحكم في تدفق الهواء المتغير (VAV)، وسخانات القنوات. كما ننتج أنظمة إدارة الكابلات (صواني الكابلات، وسلالم الكابلات، وقنوات الكابلات الرئيسية).
+    </p>
+    <button class="learn-more">يتعلم اكثر</button>
+  </div>
+
+  <div class="image-circle">
+    <img src="who-we-are.webp" alt="Engineer at work">
+  </div>
+</section>
+
+<div class="section">
+    <h1 style="color: white;">المنتجات المميزة</h1>
+   <p style="color: white;">
+    متخصص في تصنيع جميع معدات تكييف الهواء المركزي بما في ذلك حوامل الصفائح المعدنية وقنوات الكابلات
+    </p>
+
+    <div class="cards"> <!-- مهم جداً -->
+        
+        <div class="card">
+            <img src="WhatsApp Image 2026-03-22 at 12.54.46 PM.jpeg">
+            <h3>قنوات مستطيلة</h3>
+            <p>مستطيل مصمم بخبرة</p>
+                <p>توفر القنوات هواءً فائق الجودة </p>
+                 <p> التوزيع في نظام التدفئة والتهوية وتكييف الهواء</p>
+                 <br><br>
+            <a href="product1.html" class="btn">يتعلم اكثر</a>
+        </div>
+
+        <div class="card">
+            <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM.jpeg">
+            <h3>وصلات مجاري الهواء</h3>
+            <p>تجهيزات مجاري هواء عالية الجودة</p>
+                <p> لنظام التدفئة والتهوية وتكييف الهواء</p>
+                <br><br><br>
+            <a href="product2.html" class="btn">يتعلم اكثر</a>
+        </div>
+
+        <div class="card">
+            <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (1).jpeg">
+            <h3>دعامات القنوات ....</h3>
+            <p>دعامة قوية للقنوات و</p>
+            <p> علاقات مصممة لتثبيتها بإحكام تعليق ودعم الجولة</p>
+            <p>قنوات مستطيلة في أنظمة التدفئة 
+                والتهوية وتكييف الهواء </p>
+            <br>
+            <a href="product3.html" class="btn">يتعلم اكثر</a>
+        </div>
+
+        <div class="card">
+            <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (2).jpeg">
+            <h3>فولاذ طري مقاوم للحريق</h3>
+            <p>قنوات فولاذية خفيفة مقاومة للحريق</p>
+            <P> مقاومة عالية للحرارة 
+          مجاري الهواء التي تمنع الانتشار</P>
+          <P>من الحرائق والدخان في أنظمة التدفئة والتهوية وتكييف الهواء </p>
+       <br>
+            <a href="product4.html" class="btn">يتعلم اكثر</a>
+        </div>
+
+        <div class="card">
+            <img src="WhatsApp Image 2026-03-22 at 12.54.45 PM (3).jpeg">
+            <h3>مخمدات التحكم في مستوى الصوت</h3>
+            <p> مخمدات مصممة بدقة هندسية 
+              مصممة للتنظيم و </p> 
+                <p>موازنه تدفق الهواء في أنظمة التدفئة والتهوية وتكييف الهواء</p>
+                <br>
+            <a href="product5.html" class="btn">يتعلم اكثر</a>
+        </div>
+
+    </div>
+</div>
+
+<section class="custom-section">
+  <div class="overlay">
+    <div class="content">
+      <div class="text-side">
+        <h6>الصناعات</h6>
+       <b> <h2>تشمل خبرتنا الهندسية مجموعة واسعة من الصناعات </h2></b>
+        <p>تقديم حلول مبتكرة مصممة خصيصاً للتحديات الفريدة لكل قطاع</p>
+        <ul class="two-columns">
+            <li>أنظمة التدفئة والتهوية وتكييف الهواء</li>
+          <li> بناء</li>
+          <li> المباني التجارية</li>
+          <li> المنشآت الصناعية </li>
+        </ul>
+        <a href="target-page.html" class="btn">يتعلم اكثر</a>
+      </div>
+      <div class="image-side">
+        <img src="logo.png" alt="صورة توضيحية">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="card-section">
+  <!-- الصورة -->
+  <div class="image-box">
+    <img src="Banner.webp" alt="">
+  </div>
+  <!-- المحتوى -->
+  <div class="content-box">
+    <!-- النص (شمال) -->
+    <div class="text">
+      <h5>الإنجازات الرئيسية</h5>
+      <h1>معالم بارزة تُحدد إرثنا الهندسي</h1>
+      <p>
+       ISO 9001, ISO 14001, ISO 18001.
+      </p>
+    </div>
+    <!-- الزرار (يمين) -->
+    <div class="button-box">
+      <a href="page2.html" class="btn">ييتعلم اكثر</a>
+    </div>
+  </div>
+</section>
+
+<section class="gallery">
+  <h3>تعرّف على شركائنا</h3>
+  <div class="slider">
+  <div class="slide-track">
+      <img src="01K3GA2TFX2Q287XQR8PKW0ZD5.webp" alt="">
+      <img src="01K3GA3J0FTTRABM5A5ZKNCE1V.webp" alt="">
+      <img src="01K3GA3SFSVG2YDN7MXYK1RA07.webp" alt="">
+      <img src="01K3GA28JQXHTQNTRNY7YKHYKE.webp" alt="">
+      <img src="01K3GA34QTTWQZ0G2QCV0DN196.webp" alt="">
+      <!-- نكررهم عشان الحركة تبقى seamless -->
+          <img src="01K3GA2TFX2Q287XQR8PKW0ZD5.webp" alt="">
+       <img src="01K3GA34QTTWQZ0G2QCV0DN196.webp" alt=""> 
+       <img src="01K3GA28JQXHTQNTRNY7YKHYKE.webp" alt=""> 
+       <img src="01K3GA3SFSVG2YDN7MXYK1RA07.webp" alt="">
+       <img src="01K3GA3J0FTTRABM5A5ZKNCE1V.webp" alt="">
+    </div>
+  </div>
+</section>
+<section class="header-box">
+  <h4>احصل على عرض سعر مخصص</h4>
+  <h1>ابدأ رحلتك الهندسية</h1>
+</section>
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("menu");
+  menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+}
+</script>
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- اللوجو (شمال) -->
+    <div class="footer-logo">
+      <img src="logo.png" alt="Logo">
+    </div>
+
+    <!-- اللينكات (منتصف) -->
+    <div class="footer-links">
+
+      <!-- الصف الأول -->
+      <div class="footer-links-column">
+        <a href="index1.html">الرئسية</a>
+        <a href="adout1.html">معلومات عنا</a>
+        <a href="Products1.html">المنتجات</a>
+        <a href="industries1.html">الصناعات</a>
+        <a href="Project1.html">المشاريع</a>
+        <a href="quality1.html">الجوده/a>
+      </div>
+
+      <!-- الصف الثاني -->
+      <div class="footer-links-column">
+        <a href="caseers1.html">الوظائف</a>
+        <a href="Contactus1.html">اتصل بينا</a>
+        <a href="faq1.html">التعليمات</a>
+      </div>
+
+    </div>
+
+    <!-- العنوان والإيميل (يمين) -->
+    <div class="footer-contact">
+
+         <!-- Address -->
+      <div class="contact-item">
+        <span class="icon">📍</span>
+        <div>
+          <h4>العنوان</h4>
+          <p>المدينة الصناعية بجمصة المرحلة الربعة قطعه 27 ك</p>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="contact-item">
+        <span class="icon">✉️</span>
+        <div>
+          <h4>الايميل</h4>
+          <p>info@asgegy.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
