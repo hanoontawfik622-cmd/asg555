@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 <title>ASG</title>
 <style>
@@ -604,54 +605,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-
-
-/* 🔹 أهم سطر يخلي كل حاجة تحسب صح */
+/* يخلي القياسات مظبوطة */
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
-/* 🔹 يمنع السكرول الأفقي */
+/* يمنع السكرول الجانبي */
 html, body {
   overflow-x: hidden;
 }
 
-/* 🔹 الصور والفيديوهات تبقى مرنة */
-img, video {
+/* الصور تبقى مرنة */
+img {
   max-width: 100%;
   height: auto;
 }
 
-/* 🔹 أي عنصر كبير ميعديش عرض الشاشة */
-* {
-  max-width: 100%;
-}
-
-/* 🔹 النصوص متكسرش التصميم */
-body {
-  word-wrap: break-word;
-}
-
-/* 🔹 Flex و Grid ميبوظوش */
-.row, .flex, .grid {
-  flex-wrap: wrap;
-}
-
-/* 🔹 تحسين الموبايل بدون تغيير الشكل */
-@media (max-width: 768px) {
-
-  /* يقلل المسافات بدل ما يكسر التصميم */
-  section, div {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  /* يخلي الخط مناسب */
-  body {
-    font-size: 14px;
-  }
-
-}
 </style>
 </head>
 <body>
